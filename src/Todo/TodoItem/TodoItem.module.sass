@@ -1,0 +1,57 @@
+.item
+  position: relative
+  display: flex
+  justify-content: space-between
+  align-items: center
+  border: 1px solid #cccccc
+  border-radius: 2px
+  margin-bottom: 20px
+  padding: 0.5em
+  
+  &::before
+    content: ''
+    display: block
+    position: absolute
+    background-color: #000000
+    top: 50%
+    left: 6%
+    transform: translate(0, -50%)
+    width: 0
+    transition: width .3s ease-in-out
+    z-index: 1
+
+  &_completed
+    &::before
+      width: 93%
+      height: 2px
+
+.input
+  margin-right: 15px
+
+.text
+  font-weight: 500
+
+.btn
+  position: relative
+  border: none
+  background-color: transparent
+  width: 15px
+  height: 15px
+  outline: none
+  cursor: pointer
+
+  &::before,
+  &::after
+    content: ''
+    position: absolute
+    top: 50%
+    left: 0
+    width: 15px
+    height: 2px
+    background-color: #ff4747
+
+  &::before
+    transform: rotate(135deg)
+
+  &::after
+    transform: rotate(-135deg)
