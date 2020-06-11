@@ -2,18 +2,23 @@ import React, {useEffect} from 'react';
 import TodoList from './Components/TodoList/TodoList';
 
 import store from './store';
+import Preloader from './Components/Preloader/Preloader';
 import AddTodo from './Components/AddTodo/AddTodo';
 
 function App() {
   let [todos, setTodos] = React.useState([]);
+  let [preloader, setLoading] = React.useState(true);
   
   useEffect(()=> {
     fetch('https://jsonplaceholder.typicode.com/todos?_limit=5')
       .then(response => response.json())
       .then(todos => {
-        setTodos(todos);
+        setTimeout(() => {
+          setTodos(todos);
+          setLoading(false);
+        }, 500)
       })
-  })
+  },[])
 
   function toggleCheckBox(id){
     setTodos (
@@ -50,7 +55,9 @@ function App() {
       <div className="wrapper">
         <h1 className="title">React to-do list</h1>
         <AddTodo/>
-        {todos.length ? <TodoList todos={todos}/> : <p>Список задач пуст!</p>}
+
+        {preloader && <Preloader/>}
+        {todos.length ? <TodoList todos={todos}/> : preloader ? null : <p>Список задач пуст!</p>}
         
       </div>
     </store.Provider>
