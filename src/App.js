@@ -1,6 +1,8 @@
 import React from 'react'
 import TodoList from './Todo/TodoList'
 
+import store from './store'
+
 function App() {
   let [todos, setTodos] = React.useState([
     {id: 1, completed: false, title: "Купить хлеб"},
@@ -14,19 +16,26 @@ function App() {
         if(todo.id === id){
           todo.completed = !todo.completed;
         }
-        console.log(todo)
         return todo;
       })
     ) 
   }
+
+  function removeTodo(id){
+    setTodos(
+      todos.filter(todo => todo.id !== id)
+    )
+  }
   
 
   return (
-    <div className="wrapper">
-      <h1 className="title">React to-do list</h1>
+    <store.Provider value={{removeTodo, toggleCheckBox}}>
+      <div className="wrapper">
+        <h1 className="title">React to-do list</h1>
 
-      <TodoList todos={todos} toggleCheckBox={toggleCheckBox}/>
-    </div>
+        <TodoList todos={todos}/>
+      </div>
+    </store.Provider>
   )
 }
 
