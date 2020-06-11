@@ -1,13 +1,13 @@
-import React, {useContext} from 'react'
-import store from '../../store'
+import React, {useContext} from 'react';
+import store from '../../store';
 
-import styles from './TodoItem.module.sass'
+import styles from './TodoItem.module.sass';
 
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 
 function TodoItem({todo, index}){
-  const {toggleCheckBox, removeTodo} = useContext(store);
-  const classes = [];
+  let {toggleCheckBox, removeTodo} = useContext(store);
+  let classes = [];
 
   if(todo.completed){
     classes.push(styles.item_completed);
@@ -33,8 +33,7 @@ function TodoItem({todo, index}){
 
 TodoItem.propTypes = {
   todo: PropTypes.object.isRequired,
-  index: PropTypes.number,
-  toggleCheckBox: PropTypes.func.isRequired
+  index: PropTypes.number
 }
 
-export default TodoItem
+export default TodoItem;

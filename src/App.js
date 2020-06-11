@@ -1,15 +1,20 @@
-import React from 'react'
-import TodoList from './Todo/TodoList'
+import React, {useEffect} from 'react';
+import TodoList from './Components/TodoList/TodoList';
 
-import store from './store'
+import store from './store';
+import AddTodo from './Components/AddTodo/AddTodo';
 
 function App() {
-  let [todos, setTodos] = React.useState([
-    {id: 1, completed: false, title: "Купить хлеб"},
-    {id: 2, completed: false, title: "Купить масло"},
-    {id: 3, completed: false, title: "Купить молоко"}
-  ]);
-    
+  let [todos, setTodos] = React.useState([]);
+  
+  useEffect(()=> {
+    fetch('https://jsonplaceholder.typicode.com/todos?_limit=5')
+      .then(response => response.json())
+      .then(todos => {
+        setTodos(todos);
+      })
+  })
+
   function toggleCheckBox(id){
     setTodos (
       todos.map(todo => {
@@ -26,14 +31,27 @@ function App() {
       todos.filter(todo => todo.id !== id)
     )
   }
+
+  function onCreate(title){
+    setTodos(
+      todos.concat([
+        {
+          title,
+          id: Date.now(),
+          completed: false
+        }
+      ])
+    )
+  }
   
 
   return (
-    <store.Provider value={{removeTodo, toggleCheckBox}}>
+    <store.Provider value={{removeTodo, toggleCheckBox, onCreate}}>
       <div className="wrapper">
         <h1 className="title">React to-do list</h1>
-
-        <TodoList todos={todos}/>
+        <AddTodo/>
+        {todos.length ? <TodoList todos={todos}/> : <p>Список задач пуст!</p>}
+        
       </div>
     </store.Provider>
   )
