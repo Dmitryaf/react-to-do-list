@@ -1,5 +1,6 @@
 import React from 'react'
 import TodoItem from './TodoItem/TodoItem'
+
 import PropTypes from 'prop-types'
 
 function TodoList(props){
@@ -9,10 +10,9 @@ function TodoList(props){
         props.todos.map((todo, index) => {
           return (
             <TodoItem 
-              todo={todo} 
-              key={todo.id} 
-              index={index} 
-              toggleCheckBox={props.toggleCheckBox}
+              todo={todo}
+              key={todo.id}
+              index={index}
             />
           )
         })
