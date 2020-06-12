@@ -13,9 +13,8 @@
     display: block
     position: absolute
     background-color: #000000
-    top: 50%
+    top: 26px
     left: 6%
-    transform: translate(0, -50%)
     width: 0
     transition: width .3s ease-in-out
     z-index: 1
@@ -28,12 +27,21 @@
     .text
       opacity: .5
 
+.content
+  display: flex
+  align-items: center
+
 .input
   margin-right: 15px
   outline: none
 
 .text
+  display: inline-block
   font-weight: 500
+  max-width: 525px
+  padding: 5px
+  overflow-x: auto
+  transition: .3s
 
 .btn
   position: relative

@@ -7,7 +7,7 @@ import AddTodo from './Components/AddTodo/AddTodo';
 
 function App() {
   let [todos, setTodos] = React.useState([]);
-  let [preloader, setLoading] = React.useState(true);
+  let [preloader, setPreloader] = React.useState(true);
   
   useEffect(()=> {
     fetch('https://jsonplaceholder.typicode.com/todos?_limit=5')
@@ -15,7 +15,7 @@ function App() {
       .then(todos => {
         setTimeout(() => {
           setTodos(todos);
-          setLoading(false);
+          setPreloader(false);
         }, 500)
       })
   },[])

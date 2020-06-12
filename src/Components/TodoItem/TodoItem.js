@@ -15,7 +15,7 @@ function TodoItem({todo, index}){
 
   return (
       <li className={`${styles.item} ${classes.join('')}`}>
-        <span>
+        <div className={styles.content}>
           <input 
             type="checkbox"
             checked={todo.completed}
@@ -24,10 +24,10 @@ function TodoItem({todo, index}){
             />
 
           <span className={styles.text}>
-            <span>{index + 1 + "."}</span>
+            <b>{index + 1 + "."}</b>
             {todo.title}
-            </span>
-        </span>
+          </span>
+        </div>
         <button className={styles.btn} onClick={()=> removeTodo(todo.id)}></button>
       </li>
   )
